@@ -2,6 +2,7 @@ import { AppAreaChart } from "@/components/AppAreaChart";
 import AppBarChart from "@/components/AppBarChart";
 import { AppPieChart } from "@/components/AppPieChart";
 import CardList from "@/components/CardList";
+import TodoList from "@/components/TodoList";
 
 export default function Home() {
   return (
@@ -20,6 +21,9 @@ export default function Home() {
       </div>
       <div className="bg-primary-foreground p-2 rounded-lg  flex items-center justify-center">
         <CardList title="Latest Transactions" />
+      </div>
+      <div className="bg-primary-foreground p-2 rounded-lg  flex items-center justify-center">
+        <TodoList />
       </div>
     </div>
   );
