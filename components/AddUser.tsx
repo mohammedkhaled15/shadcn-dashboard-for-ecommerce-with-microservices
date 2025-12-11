@@ -1,12 +1,12 @@
 "use client";
 
-import { useForm } from "react-hook-form";
 import {
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-} from "./ui/sheet";
+} from "@/components/ui/sheet";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -16,6 +16,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "./ui/form";
 import { Input } from "./ui/input";
 import {
@@ -24,113 +25,108 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
+} from "@/components/ui/select";
 import { Button } from "./ui/button";
 
 const formSchema = z.object({
   fullName: z
     .string()
-    .min(2, { message: "Full Name can't be less than 2 characters" })
+    .min(2, { message: "Full name must be at least 2 characters!" })
     .max(50),
-  email: z.string().email({ message: "Invalid email address" }),
+  email: z.string().email({ message: "Invalid email address!" }),
   phone: z.string().min(10).max(15),
-  address: z.string().max(100),
-  city: z.string().max(100),
-  role: z.enum(["admin", "user"]),
+  address: z.string().min(2),
+  city: z.string().min(2),
 });
 
-const EditUserForm = ({ id }: { id: string }) => {
+const AddUser = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      fullName: id,
-      email: id + "@gmail.com",
-      phone: "+0125687923",
-      address: "Cairo, Egypt",
-      city: "Cairo, Egypt",
-      role: "admin",
-    },
   });
-
   return (
-    <SheetContent className="overflow-y-auto">
+    <SheetContent>
       <SheetHeader>
-        <SheetTitle className="mb-4">Edit User</SheetTitle>
+        <SheetTitle className="mb-4">Add User</SheetTitle>
         <SheetDescription asChild>
           <Form {...form}>
             <form className="space-y-8">
               <FormField
+                control={form.control}
                 name="fullName"
-                control={form.control}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Full name:</FormLabel>
+                    <FormLabel>Full Name</FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
                     <FormDescription>
-                      This is your public display username.
+                      Enter user full name.
                     </FormDescription>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
               <FormField
+                control={form.control}
                 name="email"
-                control={form.control}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email:</FormLabel>
+                    <FormLabel>Email</FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
                     <FormDescription>
-                      Only admin can see Your email.
+                      Only admin can see your email.
                     </FormDescription>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
               <FormField
+                control={form.control}
                 name="phone"
-                control={form.control}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Phone:</FormLabel>
+                    <FormLabel>Phone</FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
                     <FormDescription>
-                      Only admin can see Your Phone number.
+                      Only admin can see your phone number (optional)
                     </FormDescription>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
               <FormField
+                control={form.control}
                 name="address"
-                control={form.control}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Address:</FormLabel>
+                    <FormLabel>Address</FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
                     <FormDescription>
-                      This is the public location.
+                      Enter user address (optional)
                     </FormDescription>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
               <FormField
-                name="city"
                 control={form.control}
+                name="city"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>City:</FormLabel>
+                    <FormLabel>City</FormLabel>
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
                     <FormDescription>
-                      This is the public location.
+                      Enter user city (optional)
                     </FormDescription>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -143,4 +139,4 @@ const EditUserForm = ({ id }: { id: string }) => {
   );
 };
 
-export default EditUserForm;
+export default AddUser;

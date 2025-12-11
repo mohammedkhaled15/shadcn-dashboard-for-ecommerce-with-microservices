@@ -14,7 +14,7 @@ export default function Home() {
         <AppPieChart />
       </div>
       <div className="bg-primary-foreground p-2 rounded-lg  flex items-center justify-center">
-        <CardList title="Popular Content" />
+        <CardList title="Popular Products" />
       </div>
       <div className="bg-primary-foreground p-2 rounded-lg lg:col-span-2 xl:col-span-2 2xl:col-span-2  flex items-center justify-center">
         <AppAreaChart />

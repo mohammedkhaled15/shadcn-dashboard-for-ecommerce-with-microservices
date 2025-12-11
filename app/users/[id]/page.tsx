@@ -24,9 +24,9 @@ import { AppLineChart } from "@/components/AppLineChart";
 const SingleUserPage = async ({
   params,
 }: {
-  params: Promise<{ username: string }>;
+  params: Promise<{ id: string }>;
 }) => {
-  const { username } = await params;
+  const { id } = await params;
   return (
     <div>
       <Breadcrumb>
@@ -40,7 +40,7 @@ const SingleUserPage = async ({
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>{username}</BreadcrumbPage>
+            <BreadcrumbPage>{id}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
@@ -68,6 +68,21 @@ const SingleUserPage = async ({
               </HoverCard>
             </div>
           </div>
+          <div className="bg-primary-foreground p-4 rounded-lg space-y-2">
+            <div className="flex items-center gap-2">
+              <Avatar className="size-12">
+                <AvatarImage src="https://avatars.githubusercontent.com/u/1486366" />
+                <AvatarFallback>JD</AvatarFallback>
+              </Avatar>
+              <h1 className="text-xl font-semibold">{id}</h1>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam
+              quos reiciendis, saepe enim tempore repellendus deserunt
+              voluptatum eligendi blanditiis culpa facere quidem harum
+              voluptates quod animi perspiciatis soluta molestiae eaque.
+            </p>
+          </div>
           {/* INFORMATION CONTAINER */}
           <div className="bg-primary-foreground p-4 rounded-lg">
             <div className="flex flex-row items-center justify-between">
@@ -76,7 +91,7 @@ const SingleUserPage = async ({
                 <SheetTrigger asChild>
                   <Button>Edit User</Button>
                 </SheetTrigger>
-                <EditUserForm username={username} />
+                <EditUserForm id={id} />
               </Sheet>
             </div>
             <div className="space-y-4 mt-4">
@@ -87,53 +102,35 @@ const SingleUserPage = async ({
                 <Progress value={33} />
               </div>
               <div className="flex items-center gap-2">
-                <span className="font-bold">Username:</span>
-                <span className="font-bold">{username}</span>
+                <span className="font-bold">Full name:</span>
+                <span className="font-bold">{id}</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="font-bold">Email:</span>
-                <span className="font-bold">{username + "@gmail.com"}</span>
+                <span className="font-bold">{id + "@gmail.com"}</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="font-bold">Phone Number:</span>
                 <span className="font-bold">+201587964</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="font-bold">Location:</span>
+                <span className="font-bold">Address:</span>
                 <span className="font-bold">New York</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="font-bold">Role:</span>
-                <Badge>Admin</Badge>
+                <span className="font-bold">City:</span>
+                <span className="font-bold">New York</span>
               </div>
             </div>
             <p className="text-muted-foreground text-sm mt-4">
               Joined at 2025.01.01
             </p>
           </div>
-          {/* CARD LIST CONTAINER */}
-          <div className="bg-primary-foreground p-4 rounded-lg">
-            <CardList title="Recent Transactions" />
-          </div>
         </div>
         {/* RIGHT */}
         <div className="xl:w-2/3 space-y-6">
           {/* USER CARD CONTAINER */}
-          <div className="bg-primary-foreground p-4 rounded-lg space-y-2">
-            <div className="flex items-center gap-2">
-              <Avatar className="size-12">
-                <AvatarImage src="https://avatars.githubusercontent.com/u/1486366" />
-                <AvatarFallback>JD</AvatarFallback>
-              </Avatar>
-              <h1 className="text-xl font-semibold">{username}</h1>
-            </div>
-            <p className="text-sm text-muted-foreground">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam
-              quos reiciendis, saepe enim tempore repellendus deserunt
-              voluptatum eligendi blanditiis culpa facere quidem harum
-              voluptates quod animi perspiciatis soluta molestiae eaque.
-            </p>
-          </div>
+
           {/* CHART CONTAINER */}
           <div className="bg-primary-foreground p-4 rounded-lg">
             <AppLineChart />
